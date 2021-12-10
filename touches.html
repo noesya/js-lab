@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js touches</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body style="height: 100vh; width: 100%">
+    <h2>Tests de touch list</h2>
+    <p>Touches : <span id="touches-length">0</span></p>
+    <p id="touches-info"></p>
+    <script>
+        window.addEventListener('touchstart', (event) => {
+            document.querySelector('#touches-length').innerText = event.touches.length;
+            setInfo(event.touches);
+        });
+        window.addEventListener('touchend', (event) => {
+            document.querySelector('#touches-length').innerText = 0;
+            setInfo(event.touches);
+        });
+        window.addEventListener('touchmove', (event) => {
+            setInfo(event.touches);
+        });
+        function setInfo(touches) {
+            let text = '',
+                i = 0;
+            for( i = 0; i < touches.length; i +=1 ){
+                console.log(touches[i]);
+                text += `Touch ${i + 1} : \n`;
+                text += `• x: ${touches[i].clientX} \n• y: ${touches[i].clientY} \n\n`;
+            }
+            document.querySelector('#touches-info').innerText = text;
+
+        }
+    </script>
+</body>
+
+</html>
